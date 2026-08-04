@@ -1,0 +1,26 @@
+name: coderacer
+
+topology:
+  nodes:
+    router:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - sysctl -w net.ipv4.ip_forward=1
+
+    client1:
+      kind: linux
+      image: alpine:latest
+
+    client2:
+      kind: linux
+      image: alpine:latest
+
+    client3:
+      kind: linux
+      image: alpine:latest
+
+  links:
+    - endpoints: ["router:eth1", "client1:eth1"]
+    - endpoints: ["router:eth2", "client2:eth1"]
+    - endpoints: ["router:eth3", "client3:eth1"]
